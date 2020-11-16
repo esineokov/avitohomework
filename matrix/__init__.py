@@ -1,8 +1,8 @@
+import asyncio
 from typing import List
 import aiohttp
 import logging
 import re
-
 
 log = logging.getLogger(__name__)
 
@@ -87,7 +87,15 @@ async def get_matrix(url: str) -> List[int]:
             log.error(f"Connection error: {e}")
         except aiohttp.ClientResponseError as e:
             log.error(f"Client response error: {e}")
+        except asyncio.TimeoutError as e:
+            log.error(f"Timeout error: {e}")
         except (TypeError, TypeError) as e:
             log.error(e)
+        finally:
+            await session.close()
+
+    # Solution for bug https://github.com/aio-libs/aiohttp/issues/2039
+    await asyncio.sleep(0.03)
+
     return result
 
