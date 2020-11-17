@@ -94,8 +94,5 @@ async def get_matrix(url: str) -> List[int]:
         finally:
             await session.close()
 
-    # Solution for bug https://github.com/aio-libs/aiohttp/issues/2039
-    await asyncio.sleep(0.03)
-
     return result
 

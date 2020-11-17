@@ -7,6 +7,7 @@ logging.basicConfig(level="ERROR")
 
 
 class TestMatrix(unittest.TestCase):
+
     def setUp(self):
         self.source_url = "https://f003.backblazeb2.com/file/am-avito/matrix.txt"
         self.traversal_ok = [
@@ -34,3 +35,5 @@ class TestMatrix(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
+    # Solution for bug https://github.com/aio-libs/aiohttp/issues/2039
+    asyncio.run(asyncio.sleep(0))
